@@ -5,6 +5,8 @@ Aplicación Empresarial con ReactJS y GraphQL. Incluye Apollo Server y Client, R
 ### backend>graphql-servidor>
 
 #### Dependencias
->npm install nodemon express
->npm install --save-dev babel-cli babel-preset-env babel-preset-stage-0
->npm install --save express-graphql graphql
+*>npm install nodemon express
+*>npm install --save-dev babel-cli babel-preset-env babel-preset-stage-0
+*>npm install --save express-graphql graphql
+*>npm install --save graphql-tools graphql-import
+*>npm install --save mongoose

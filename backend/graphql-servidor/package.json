@@ -1,30 +1,35 @@
 {
-  "name": "graphql-servidor",
-  "version": "1.0.0",
-  "description": "GraphQL Servidor",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon ./index.js --exec babel-node -e js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Emasesosos/MERN_GQL.git"
-  },
-  "author": "Emmanuel Martínez",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Emasesosos/MERN_GQL/issues"
-  },
-  "homepage": "https://github.com/Emasesosos/MERN_GQL#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
-    "graphql": "^14.5.8",
-    "nodemon": "^1.19.4"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1"
-  }
+    "name": "graphql-servidor",
+    "version": "1.0.0",
+    "description": "GraphQL Servidor",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon ./src/index.js --exec babel-node -e js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Emasesosos/MERN_GQL.git"
+    },
+    "author": "Emmanuel Martínez",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Emasesosos/MERN_GQL/issues"
+    },
+    "homepage": "https://github.com/Emasesosos/MERN_GQL#readme",
+    "dependencies": {
+        "colors": "^1.4.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-graphql": "^0.9.0",
+        "graphql": "^14.5.8",
+        "graphql-import": "^0.7.1",
+        "graphql-tools": "^4.0.6",
+        "mongoose": "^5.7.7",
+        "nodemon": "^1.19.4"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-stage-0": "^6.24.1"
+    }
 }
