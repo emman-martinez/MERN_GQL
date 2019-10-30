@@ -10,3 +10,10 @@ Aplicación Empresarial con ReactJS y GraphQL. Incluye Apollo Server y Client, R
 *>npm install --save express-graphql graphql
 *>npm install --save graphql-tools graphql-import
 *>npm install --save mongoose
+*servidor> npm install apollo-server-express
+
+## Frontend
+### frontend>cliente>
+*>npm install --save apollo-boost react-apollo graphql graphql-tag
+*>npm install bootstrap
+*>npm install bootswatch
