@@ -18,5 +18,5 @@ mongoose.connect(URI, {
 const connection = mongoose.connection;
 
 connection.once('open', () => {
-    console.log('DB is Connected:'.cyan, PENV_MONGO_URI.cyan)
+    console.log('DB is Connected on: '.cyan, PENV_MONGO_URI.blue)
 });

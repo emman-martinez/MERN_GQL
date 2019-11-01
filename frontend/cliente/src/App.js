@@ -5,6 +5,7 @@ import 'bootswatch/dist/flatly/bootstrap.min.css';
 
 // Importar componentes
 import Header from './componentes/Header';
+import Clientes from './componentes/Clientes';
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -18,7 +19,12 @@ class App extends Component {
   render() {
     return(
       <ApolloProvider client={client}>
+        { /* ***** Componente: Header ***** */ }
         <Header/>
+        <div className="container">
+          { /* ***** Componente: Clientes ***** */ }
+          <Clientes/>
+        </div>
       </ApolloProvider>
     );
   }
