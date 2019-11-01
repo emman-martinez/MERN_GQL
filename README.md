@@ -17,3 +17,4 @@ Aplicación Empresarial con ReactJS y GraphQL. Incluye Apollo Server y Client, R
 *>npm install --save apollo-boost react-apollo graphql graphql-tag
 *>npm install bootstrap
 *>npm install bootswatch
+*>npm install --save react-router-dom
