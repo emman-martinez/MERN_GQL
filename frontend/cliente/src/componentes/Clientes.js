@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 
 const Contactos = () => {
     return(
-        <Query query={ CLIENTES_QUERY }>
-            {({ loading, error, data }) => {
+        <Query query={ CLIENTES_QUERY } pollInterval={1000}> 
+            {({ loading, error, data, startPolling, stopPolling }) => {
                 if(loading) return "Cargando...";
                 if(error) return `Error: ${error.message}`;
-                const clientes = data.getClientes;
                 console.log(data.getClientes);
+                const clientes = data.getClientes;
                 return(
                     <Fragment>
                         <h2 className="text-center mt-4">Listado Clientes</h2>

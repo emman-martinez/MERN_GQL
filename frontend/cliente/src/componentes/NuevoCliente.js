@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { NUEVO_CLIENTE } from './../mutations/index';
+import { NUEVO_CLIENTE } from './../mutations';
 import { Mutation } from 'react-apollo';
 
 class NuevoCliente extends Component {
@@ -13,8 +13,15 @@ class NuevoCliente extends Component {
             email: '',
             tipo: ''
         },
-        error: false
-     }
+        error: false,
+        emails: []
+    }
+
+    nuevoCampo = () => {
+        this.setState({
+            emails: this.state.emails.concat([{email:''}])
+        })
+    }
 
     render() { 
 
@@ -22,11 +29,13 @@ class NuevoCliente extends Component {
 
         let respuesta = '';
 
-        if (!error) {
+        if (error) {
             respuesta = <p className="alert alert-danger p-3 text-center">Todos los campos son Obligatorios</p>;
         } else {
             respuesta = '';
         }
+
+        const { emails } = this.state;
 
         return ( 
             <Fragment>
@@ -106,7 +115,7 @@ class NuevoCliente extends Component {
                                     </div>
                                 </div>
                                 <div className="form-row">
-                                    <div className="form-group col-md-6">
+                                    <div className="form-group col-md-12">
                                         <label>Empresa</label>
                                         <input 
                                             type="text" 
@@ -122,21 +131,26 @@ class NuevoCliente extends Component {
                                             }} 
                                         />
                                     </div>
-                                    <div className="form-group col-md-6">
-                                        <label>Email</label>
-                                        <input 
-                                            type="email" 
-                                            className="form-control" 
-                                            placeholder="Email"
-                                            onChange={e => {
-                                                this.setState({
-                                                    cliente: {
-                                                        ...this.state.cliente,
-                                                        email: e.target.value 
-                                                    }
-                                                })
-                                            }}  
-                                        />
+                                    {   emails.map((input, index) => (
+                                                <div key={index} className="form-group col-md-12">
+                                                    <label>Correo: {index + 1}</label>
+                                                    <input 
+                                                        type="email"
+                                                        placeholder="Email"
+                                                        className="form-control"
+                                                    />
+                                                </div>
+                                            )
+                                        )
+                                    }
+                                    <div className="form-group d-flex justify-content-center col-md-12">
+                                        <button
+                                            onClick={this.nuevoCampo}
+                                            type="button"
+                                            className="btn btn-warning"
+                                        >
+                                            + Agregar Email
+                                        </button>
                                     </div>
                                 </div>
                                 <div className="form-row">
@@ -184,8 +198,8 @@ class NuevoCliente extends Component {
                     </Mutation>
                 </div>
             </Fragment>
-         );
+        );
     }
 }
- 
+
 export default NuevoCliente;
