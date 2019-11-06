@@ -23,9 +23,31 @@ class NuevoCliente extends Component {
         })
     }
 
+    quitarCampo = (i) => () => {
+        // console.log(`Eliminar Campo ${i}`);
+        this.setState({
+            emails: this.state.emails.filter((email,index) => i !== index)
+        })
+    }
+
+    leerCampo = (i) => (e) => {
+        // console.log(`Estas Escribiendo: ${e.target.value} en ${i} `);
+        const { emails } = this.state;
+        const nuevoEmail = emails.map((email, index) => {
+            if(i !== index) return email;
+            return {
+                ...email,
+                email: e.target.value
+            }
+        });
+        this.setState({
+            emails: nuevoEmail
+        });
+    }
+
     render() { 
 
-        const { error } = this.state;
+        const { error, emails } = this.state;
 
         let respuesta = '';
 
@@ -34,8 +56,6 @@ class NuevoCliente extends Component {
         } else {
             respuesta = '';
         }
-
-        const { emails } = this.state;
 
         return ( 
             <Fragment>
@@ -53,8 +73,10 @@ class NuevoCliente extends Component {
                             <form className="col-md-8 m-3"
                                 onSubmit = {e => {
                                     e.preventDefault();
-                                    const { nombre, apellido, empresa, edad, tipo, email } = this.state.cliente;
-                                    
+                                    // const { nombre, apellido, empresa, edad, tipo, email } = this.state.cliente;
+                                    const { nombre, apellido, empresa, edad, tipo } = this.state.cliente;
+                                    const { emails } = this.state;
+
                                     if(nombre === '' || apellido === '' || empresa === '' || edad === '' || tipo === '') {
                                         this.setState({
                                             error: true
@@ -72,7 +94,7 @@ class NuevoCliente extends Component {
                                         empresa,
                                         edad: Number(edad),
                                         tipo,
-                                        email
+                                        emails
                                     };
                                     // console.log(input);
                                     crearCliente({
@@ -92,7 +114,7 @@ class NuevoCliente extends Component {
                                                     cliente: {
                                                         ...this.state.cliente,
                                                         nombre: e.target.value
-                                                    }
+                                                    } 
                                                 })
                                             }} 
                                         />
@@ -134,11 +156,23 @@ class NuevoCliente extends Component {
                                     {   emails.map((input, index) => (
                                                 <div key={index} className="form-group col-md-12">
                                                     <label>Correo: {index + 1}</label>
-                                                    <input 
-                                                        type="email"
-                                                        placeholder="Email"
-                                                        className="form-control"
-                                                    />
+                                                    <div className="input-group">
+                                                        <input 
+                                                            onChange={this.leerCampo(index)} 
+                                                            type="email"
+                                                            placeholder="Email"
+                                                            className="form-control"
+                                                        />
+                                                        <div className="input-group-append">
+                                                            <button
+                                                                onClick={this.quitarCampo(index)}
+                                                                type="button"
+                                                                className="btn btn-danger"
+                                                            >
+                                                                &times; Eliminar
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             )
                                         )
