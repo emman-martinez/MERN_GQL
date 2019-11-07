@@ -24,8 +24,12 @@ class EditarCliente extends Component {
                             if(loading) return 'Cargando...';
                             if(error) return `¡Error! ${error.message}`;
                             console.log(data);
+                            const { getCliente } = data;
+                            console.log(getCliente);
                             return(
-                                <FormularioEditarCliente/>
+                                <FormularioEditarCliente
+                                    cliente={getCliente}  
+                                />
                             );
                         }}
                     </Query>
