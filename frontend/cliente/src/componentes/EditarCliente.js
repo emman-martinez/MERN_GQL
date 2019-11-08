@@ -10,7 +10,7 @@ class EditarCliente extends Component {
     render() { 
         // Tomar el Id del contacto a Editar
         const { id } = this.props.match.params;
-        console.log(id);
+        // console.log(id);
 
         return ( 
 
