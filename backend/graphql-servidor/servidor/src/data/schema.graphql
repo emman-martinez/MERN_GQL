@@ -23,8 +23,9 @@ type Cliente {
         PREMIUM
     }
     type Query { 
-        getClientes(limite: Int): [Cliente]    
-        getCliente(id: ID) : Cliente 
+        getClientes(limite: Int, offset: Int): [Cliente]    
+        getCliente(id: ID) : Cliente  
+        totalClientes: String  
     }
 # MUTATION CLIENTE
     input EmailInput {

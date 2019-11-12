@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { ACTUALIZAR_CLIENTE } from './../mutations';
 import { Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 class FormularioEditarCliente extends Component { 
 
@@ -41,8 +42,10 @@ class FormularioEditarCliente extends Component {
                 <Fragment>
                     <Mutation 
                         mutation={ACTUALIZAR_CLIENTE}
-                        onCompleted={ () => this.props.history.push('/') }
-                    >
+                        onCompleted={ () => this.props.refetch().then(() => {
+                            this.props.history.push('/')  
+                        })}
+                    > 
                         {
                             actualizarCliente => (
                                 // ***** FORMULARIO INICIO *****  
@@ -51,7 +54,7 @@ class FormularioEditarCliente extends Component {
                                     onSubmit={e => {
                                             e.preventDefault();
                                             const { id, nombre, apellido, empresa, edad, tipo } = this.state.cliente;
-                                            const { emails } = this.state;
+                                            const { emails } = this.state; 
 
                                             const input = {
                                                 id,
@@ -212,4 +215,4 @@ class FormularioEditarCliente extends Component {
 }
  
 
-export default FormularioEditarCliente;
+export default withRouter(FormularioEditarCliente);
