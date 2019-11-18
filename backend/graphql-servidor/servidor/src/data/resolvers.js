@@ -22,6 +22,17 @@ export const resolvers = {
                     else resolve(count)
                 });
             });
+        },
+        obtenerProductos: (root, { limite, offset }) => {
+            return Productos.find({}).limit(limite).skip(offset)
+        },
+        obtenerProducto: (root, { id }) => {
+            return new Promise((resolve, object) => {
+                Productos.findById(id, (error, producto) => {
+                    if (error) rejects(error)
+                    else resolve(producto)
+                });
+            });
         }
     },
     Mutation: {
@@ -54,7 +65,7 @@ export const resolvers = {
         },
         eliminarCliente: (root, { id }) => {
             return new Promise((resolve, object) => {
-                Clientes.findOneAndRemove({ _id: id }, (error) => {
+                Clientes.findOneAndDelete({ _id: id }, (error) => {
                     if (error) rejects(error)
                     else resolve("Se eliminó Correctamente")
                 });
@@ -73,6 +84,22 @@ export const resolvers = {
                 nuevoProducto.save((error) => {
                     if (error) rejects(error)
                     else resolve(nuevoProducto)
+                });
+            });
+        },
+        actualizarProducto: (root, { input }) => {
+            return new Promise((resolve, producto) => {
+                Productos.findOneAndUpdate({ _id: input.id }, input, { new: true }, (error, producto) => {
+                    if (error) rejects(error)
+                    else resolve(producto)
+                });
+            });
+        },
+        eliminarProducto: (root, { id }) => {
+            return new Promise((resolve, producto) => {
+                Productos.findOneAndDelete({ _id: id }, (error) => {
+                    if (error) rejects(error)
+                    else resolve("Se eliminó Correctamente")
                 });
             });
         }
