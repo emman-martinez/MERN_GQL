@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 
 mongoose.Promise = global.Promise;
 
+// mongoose.set('setFindAndModify', false);
+
 const PENV_MONGO_URI = process.env.MONGODB_URI;
 
 const URI = PENV_MONGO_URI ?
@@ -18,5 +20,5 @@ mongoose.connect(URI, {
 const connection = mongoose.connection;
 
 connection.once('open', () => {
-    console.log('DB is Connected on: '.cyan, PENV_MONGO_URI.blue)
+    console.log('DB is Connected on: '.cyan, PENV_MONGO_URI.blue);
 });
