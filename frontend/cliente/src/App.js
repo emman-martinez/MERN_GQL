@@ -5,10 +5,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootswatch/dist/flatly/bootstrap.min.css';
 
 // Importar componentes
-import Header from './componentes/Header';
-import Clientes from './componentes/Clientes';
-import EditarCliente from './componentes/EditarCliente';
-import NuevoCliente from './componentes/NuevoCliente';
+import Header from './componentes/Layout/Header';
+import Clientes from './componentes/Clientes/Clientes';
+import EditarCliente from './componentes/Clientes/EditarCliente';
+import NuevoCliente from './componentes/Clientes/NuevoCliente';
+
+import NuevoProducto from './componentes/Productos/NuevoProducto'; 
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -17,7 +19,7 @@ const client = new ApolloClient({
   }),
   onError: ({networkError, graphQLErrors}) => {
     console.log('graphQLErrors', graphQLErrors);
-    console.log('networkError', networkError);
+    console.log('networkError', networkError); 
   }
 });
 
@@ -37,6 +39,8 @@ class App extends Component {
                 <Route exact path="/cliente/editar/:id" component={EditarCliente}/>
                 { /* ***** Route --> Componente: NuevoCliente ***** */ }
                 <Route exact path="/cliente/nuevo" component={NuevoCliente}/>
+                { /* ***** Route --> Componente: NuevoProducto ***** */ }
+                <Route exact path="/productos/nuevo" component={NuevoProducto}/>
               </Switch>
             </div>
           </Fragment>

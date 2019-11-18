@@ -2,14 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
-import { CLIENTES_QUERY } from './../queries';
-import { ELIMINAR_CLIENTE } from './../mutations';
+import { CLIENTES_QUERY } from './../../queries';
+import { ELIMINAR_CLIENTE } from './../../mutations';
 
-import Paginador from './Paginador';
+import Paginador from '../Paginador';
 
 class Clientes extends Component {
 
-    limite = 2; 
+    limite = 2;
 
     state = {
         paginador: {
@@ -36,11 +36,11 @@ class Clientes extends Component {
                 actual: this.state.paginador.actual + 1
             }
         })
-    } 
+    }
 
-    render() { 
+    render() {
 
-        return (
+        return (  
             <Query query={ CLIENTES_QUERY } pollInterval={1000} variables={{limite: this.limite, offset: this.state.paginador.offset}}> 
 
                 {({ loading, error, data, startPolling, stopPolling }) => {
@@ -112,9 +112,9 @@ class Clientes extends Component {
                         </Fragment>
                     );
                 }}
-            </Query>
+            </Query> 
         );
     }
 }
- 
-export default Clientes; 
+
+export default Clientes;
