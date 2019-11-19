@@ -1,5 +1,6 @@
 import { rejects } from 'assert';
 const Clientes = require('./../models/Clientes');
+const Productos = require('./../models/Productos');
 
 export const resolvers = {
     Query: {
@@ -16,10 +17,21 @@ export const resolvers = {
         },
         totalClientes: (root) => {
             return new Promise((resolve, object) => {
-                    Clientes.countDocuments({}, (error, count) => {
-                        if(error) rejects(error)
-                        else resolve(count)
-                    });
+                Clientes.countDocuments({}, (error, count) => {
+                    if (error) rejects(error)
+                    else resolve(count)
+                });
+            });
+        },
+        obtenerProductos: (root, { limite, offset }) => {
+            return Productos.find({}).limit(limite).skip(offset)
+        },
+        obtenerProducto: (root, { id }) => {
+            return new Promise((resolve, object) => {
+                Productos.findById(id, (error, producto) => {
+                    if (error) rejects(error)
+                    else resolve(producto)
+                });
             });
         }
     },
@@ -53,7 +65,39 @@ export const resolvers = {
         },
         eliminarCliente: (root, { id }) => {
             return new Promise((resolve, object) => {
-                Clientes.findOneAndRemove({ _id: id }, (error) => {
+                Clientes.findOneAndDelete({ _id: id }, (error) => {
+                    if (error) rejects(error)
+                    else resolve("Se eliminó Correctamente")
+                });
+            });
+        },
+        nuevoProducto: (root, { input }) => {
+            const nuevoProducto = new Productos({
+                nombre: input.nombre,
+                precio: input.precio,
+                stock: input.stock
+            });
+            // MongoDB crea el ID que se asigna al objeto
+            nuevoProducto.id = nuevoProducto._id;
+
+            return new Promise((resolve, object) => {
+                nuevoProducto.save((error) => {
+                    if (error) rejects(error)
+                    else resolve(nuevoProducto)
+                });
+            });
+        },
+        actualizarProducto: (root, { input }) => {
+            return new Promise((resolve, producto) => {
+                Productos.findOneAndUpdate({ _id: input.id }, input, { new: true }, (error, producto) => {
+                    if (error) rejects(error)
+                    else resolve(producto)
+                });
+            });
+        },
+        eliminarProducto: (root, { id }) => {
+            return new Promise((resolve, producto) => {
+                Productos.findOneAndDelete({ _id: id }, (error) => {
                     if (error) rejects(error)
                     else resolve("Se eliminó Correctamente")
                 });

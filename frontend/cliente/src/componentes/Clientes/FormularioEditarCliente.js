@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { ACTUALIZAR_CLIENTE } from './../mutations';
+import { ACTUALIZAR_CLIENTE } from './../../mutations';
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 
@@ -213,6 +213,6 @@ class FormularioEditarCliente extends Component {
             )      
     }
 }
- 
+
 
 export default withRouter(FormularioEditarCliente);

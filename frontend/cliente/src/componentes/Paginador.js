@@ -34,5 +34,5 @@ class Paginador extends Component {
 
     }
 }
- 
+
 export default Paginador;
