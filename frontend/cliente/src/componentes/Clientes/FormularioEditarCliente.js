@@ -42,8 +42,8 @@ class FormularioEditarCliente extends Component {
                 <Fragment>
                     <Mutation 
                         mutation={ACTUALIZAR_CLIENTE}
-                        onCompleted={ () => this.props.refetch().then(() => {
-                            this.props.history.push('/')  
+                        onCompleted={ () => this.props.refetch().then(() => { 
+                            this.props.history.push('/clientes')  
                         })}
                     > 
                         {

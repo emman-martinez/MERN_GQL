@@ -33,6 +33,14 @@ export const resolvers = {
                     else resolve(producto)
                 });
             });
+        },
+        totalProductos: (root) => {
+            return new Promise((resolve, object) => {
+                Productos.countDocuments({}, (error, count) => {
+                    if (error) rejects(error)
+                    else resolve(count)
+                });
+            });
         }
     },
     Mutation: {
@@ -67,7 +75,7 @@ export const resolvers = {
             return new Promise((resolve, object) => {
                 Clientes.findOneAndDelete({ _id: id }, (error) => {
                     if (error) rejects(error)
-                    else resolve("Se eliminó Correctamente")
+                    else resolve("El Cliente se Eliminó Correctamente")
                 });
             });
         },
@@ -99,7 +107,7 @@ export const resolvers = {
             return new Promise((resolve, producto) => {
                 Productos.findOneAndDelete({ _id: id }, (error) => {
                     if (error) rejects(error)
-                    else resolve("Se eliminó Correctamente")
+                    else resolve("El Producto se Eliminó Correctamente")
                 });
             });
         }

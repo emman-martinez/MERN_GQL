@@ -36,17 +36,17 @@ class App extends Component {
             <div className="container">
               <Switch>
                 { /* ***** Route --> Componente: Clientes ***** */ }
-                <Route exact path="/" component={Clientes}/>
+                <Route exact path="/clientes" component={Clientes}/>
                 { /* ***** Route --> Componente: EditarCliente ***** */ }
-                <Route exact path="/cliente/editar/:id" component={EditarCliente}/>
+                <Route exact path="/clientes/editar/:id" component={EditarCliente}/>
                 { /* ***** Route --> Componente: NuevoCliente ***** */ }
-                <Route exact path="/cliente/nuevo" component={NuevoCliente}/>
+                <Route exact path="/clientes/nuevo" component={NuevoCliente}/> 
                 { /* ***** Route --> Componente: Productos ***** */ }
                 <Route exact path="/productos" component={Productos}/>
+                { /* ***** Route --> Componente: EditarProducto ***** */ }
+                <Route exact path="/productos/editar/:id" component={EditarProducto}/> 
                 { /* ***** Route --> Componente: NuevoProducto ***** */ }
                 <Route exact path="/productos/nuevo" component={NuevoProducto}/>
-                { /* ***** Route --> Componente: EditarProducto ***** */ }
-                <Route exact path="/productos/editar/:id" component={EditarProducto}/>
               </Switch>
             </div>
           </Fragment>

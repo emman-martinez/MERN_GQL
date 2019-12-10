@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import { ACTUALIZAR_PRODUCTO } from './../../mutations'; 
 
+import { withRouter } from 'react-router-dom';
+
 const initialState = {
     nombre: '',
     precio: '',
     stock: ''
-}
+} 
 
 class FormularioEditarProducto extends Component {
 
@@ -38,7 +40,11 @@ class FormularioEditarProducto extends Component {
         e.preventDefault();
 
         actualizarProducto().then(data => {
-            console.log(data);
+            // console.log(data);
+            this.setState({
+                ...initialState 
+            })
+
         })
     }
 
@@ -59,6 +65,9 @@ class FormularioEditarProducto extends Component {
                 mutation={ACTUALIZAR_PRODUCTO}
                 variables={{input}}
                 key={id} 
+                onCompleted={() => this.props.refetch().then(() => {
+                    this.props.history.push('/productos')
+                })}
             >
                 {
                     ( actualizarProducto, {loading, error, data}) => {
@@ -122,4 +131,4 @@ class FormularioEditarProducto extends Component {
     }
 }
 
-export default FormularioEditarProducto;
+export default withRouter(FormularioEditarProducto);
