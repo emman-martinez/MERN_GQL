@@ -25,7 +25,11 @@ const Resumen = (props) => {
                     {
                         productos.map((producto, index) => (
                                 <Producto
-                                    key={index}
+                                    key={producto.id}
+                                    id={producto.id}
+                                    producto={producto}
+                                    index={index}
+                                    actualizarCantidad={props.actualizarCantidad}
                                 />
                             )
                         )
