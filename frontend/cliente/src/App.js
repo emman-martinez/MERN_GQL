@@ -14,6 +14,8 @@ import NuevoProducto from './componentes/Productos/NuevoProducto';
 import Productos from './componentes/Productos/Productos';
 import EditarProducto from './componentes/Productos/EditarProducto';
 
+import NuevoPedido from './componentes/Pedidos/NuevoPedido'; 
+
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache({
@@ -22,7 +24,7 @@ const client = new ApolloClient({
   onError: ({networkError, graphQLErrors}) => {
     console.log('graphQLErrors', graphQLErrors);
     console.log('networkError', networkError); 
-  }
+  } 
 });
 
 class App extends Component {
@@ -35,18 +37,23 @@ class App extends Component {
             <Header/>
             <div className="container">
               <Switch>
+                { /* ***** CLIENTES ***** */ }
                 { /* ***** Route --> Componente: Clientes ***** */ }
                 <Route exact path="/clientes" component={Clientes}/>
                 { /* ***** Route --> Componente: EditarCliente ***** */ }
                 <Route exact path="/clientes/editar/:id" component={EditarCliente}/>
                 { /* ***** Route --> Componente: NuevoCliente ***** */ }
-                <Route exact path="/clientes/nuevo" component={NuevoCliente}/> 
+                <Route exact path="/clientes/nuevo" component={NuevoCliente}/>
+                { /* ***** PRODUCTOS ***** */ } 
                 { /* ***** Route --> Componente: Productos ***** */ }
                 <Route exact path="/productos" component={Productos}/>
                 { /* ***** Route --> Componente: EditarProducto ***** */ }
                 <Route exact path="/productos/editar/:id" component={EditarProducto}/> 
                 { /* ***** Route --> Componente: NuevoProducto ***** */ }
                 <Route exact path="/productos/nuevo" component={NuevoProducto}/>
+                { /* ***** PEDIDOS ***** */ }
+                { /* ***** Route --> Componente: NuevoProducto ***** */ }
+                <Route exact path="/pedidos/nuevo/:id" component={NuevoPedido}/>
               </Switch>
             </div>
           </Fragment>
