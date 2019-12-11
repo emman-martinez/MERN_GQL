@@ -18,3 +18,4 @@ Aplicación Empresarial con ReactJS y GraphQL. Incluye Apollo Server y Client, R
 *>npm install bootstrap
 *>npm install bootswatch
 *>npm install --save react-router-dom
+*>npm install react-select
