@@ -6,7 +6,7 @@ const Resumen = (props) => {
     const productos = props.productos;
     console.log(productos);
 
-    if(productos.length === 0) return null;
+    if(productos === null || productos.length === 0) return null;
 
     return(
         <Fragment>
@@ -30,6 +30,7 @@ const Resumen = (props) => {
                                     producto={producto}
                                     index={index}
                                     actualizarCantidad={props.actualizarCantidad}
+                                    eliminarProducto={props.eliminarProducto}
                                 />
                             )
                         )

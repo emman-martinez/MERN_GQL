@@ -12,7 +12,8 @@ import Resumen from './Resumen';
 class ContenidoPedido extends Component {
 
     state = {
-        productos: []
+        productos: [],
+        total: 0
     }
 
     seleccionarProducto = (productos) => {
@@ -22,14 +23,34 @@ class ContenidoPedido extends Component {
         })
     }
 
+    actualizarTotal = () => {
+        // Leer el state de productos
+        const productos = this.state.productos;
+        // Cuando los productos están en cero
+        if(productos.length === 0) {
+            this.setState({
+                total: 0
+            });
+            return;
+        }
+        let nuevoTotal = 0;
+        
+        // Realizar la operación de cantidad x precio
+        productos.map(producto => nuevoTotal += (producto.cantidad * producto.precio));
+
+        this.setState({
+            total: nuevoTotal
+        })
+
+    }
+
     actualizarCantidad = (cantidad, index) => {
         // console.log(cantidad);
 
         // Leer el state de productos
         const productos = this.state.productos;
+        // Agregar la cantidad desde la interfaz
         productos[index].cantidad = Number(cantidad);
-            // console.log(productos); 
-            // console.log(index);
 
         // Actualizar la cantidad de los productos
 
@@ -38,11 +59,27 @@ class ContenidoPedido extends Component {
         // Agregar al state
         this.setState({
             productos
+        }, () => {
+            this.actualizarTotal();
         })
  
     }
 
+    eliminarProducto = (id) => {
+        // console.log(id);
+        const productos = this.state.productos;
+
+        const productosRestantes = productos.filter(producto => producto.id !== id);
+
+        this.setState({
+            productos: productosRestantes
+        }, () => {
+            this.actualizarTotal();
+        })
+    }
+
     render() {
+
         return (
             <Fragment>
                 <h2 className="text-center mb-5">Seleccionar Artículos</h2>
@@ -54,11 +91,19 @@ class ContenidoPedido extends Component {
                     placeholder={'Seleccionar Productos'}
                     getOptionValue={(options) => options.id}
                     getOptionLabel={(options) => options.nombre}
+                    value={this.state.productos}
                 />
                 <Resumen
                     productos={this.state.productos}
                     actualizarCantidad={this.actualizarCantidad}
+                    eliminarProducto={this.eliminarProducto}
                 />
+                <p className="font-weight-bold float-right mt-3">
+                    Total:
+                    <span className="font-weight-normal">
+                        $ {this.state.total}
+                    </span>
+                </p>
             </Fragment>
         );
     }
