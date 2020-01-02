@@ -1,9 +1,11 @@
 import { rejects } from 'assert';
 const Clientes = require('./../models/Clientes');
 const Productos = require('./../models/Productos');
+const Pedidos = require('./../models/Pedidos');
 
 export const resolvers = {
     Query: {
+        // ***** Q: CLIENTES ***** //
         getClientes: (root, { limite, offset }) => {
             return Clientes.find({}).limit(limite).skip(offset)
         },
@@ -23,6 +25,7 @@ export const resolvers = {
                 });
             });
         },
+        // ***** Q: PRODUCTOS ***** //
         obtenerProductos: (root, { limite, offset }) => {
             return Productos.find({}).limit(limite).skip(offset)
         },
@@ -41,9 +44,14 @@ export const resolvers = {
                     else resolve(count)
                 });
             });
-        }
+        },
+        // ***** Q: PEDIDOS ***** //
+        //getPedidos: (root, { limite, offset }) => {
+        //  return Pedidos.find({}).limit(limite).skip(offset)
+        //},
     },
     Mutation: {
+        // ***** M: CLIENTES ***** //
         crearCliente: (root, { input }) => {
             const nuevoCliente = new Clientes({
                 nombre: input.nombre,
@@ -79,6 +87,7 @@ export const resolvers = {
                 });
             });
         },
+        // ***** M: PRODUCTOS ***** //
         nuevoProducto: (root, { input }) => {
             const nuevoProducto = new Productos({
                 nombre: input.nombre,
@@ -109,6 +118,24 @@ export const resolvers = {
                     if (error) rejects(error)
                     else resolve("El Producto se Eliminó Correctamente")
                 });
+            });
+        },
+        // ***** M: PEDIDOS ***** //
+        nuevoPedido: (root, { input }) => { // input: Variable que se lee desde ReactJS
+            const nuevoPedido = new Pedidos({
+                pedido: input.pedido,
+                total: input.total,
+                fecha: new Date(),
+                cliente: input.cliente,
+                estado: "PENDIENTE"
+            });
+            nuevoPedido.id = nuevoPedido._id;
+
+            return new Promise((resolve, object) => { // Mutation --> Graphql con Mongoose --> return Promise
+                nuevoPedido.save((error) => { // save método de mongoose
+                    if (error) rejects(error)
+                    else resolve(nuevoPedido)
+                })
             });
         }
     }
