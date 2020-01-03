@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Select from 'react-select';
 import Animated from 'react-select/animated';
 import Resumen from './Resumen';
+import GenerarPedido from './GenerarPedido';
 
 // const options = [
 //     { value: 'chocolate', label: 'Chocolate' },
@@ -62,7 +63,7 @@ class ContenidoPedido extends Component {
         }, () => {
             this.actualizarTotal();
         })
- 
+
     }
 
     eliminarProducto = (id) => {
@@ -104,6 +105,10 @@ class ContenidoPedido extends Component {
                         $ {this.state.total}
                     </span>
                 </p>
+                <GenerarPedido
+                    productos={this.state.productos}
+                    total={this.state.total}
+                />
             </Fragment>
         );
     }

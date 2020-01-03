@@ -130,8 +130,21 @@ export const resolvers = {
                 estado: "PENDIENTE"
             });
             nuevoPedido.id = nuevoPedido._id;
-
             return new Promise((resolve, object) => { // Mutation --> Graphql con Mongoose --> return Promise
+                // Recorrer y actualizar la cantidad de productos
+                input.pedido.forEach(pedido => {
+                    Productos.updateOne({ _id: pedido.id }, // Método de Mongoose
+                        {
+                            "$inc": // Función de MongooDB
+                            { "stock": -pedido.cantidad }
+                        },
+                        function(error) {
+
+                            if (error) return new Error(error)
+
+                        }
+                    );
+                });
                 nuevoPedido.save((error) => { // save método de mongoose
                     if (error) rejects(error)
                     else resolve(nuevoPedido)

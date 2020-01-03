@@ -100,7 +100,7 @@ input PedidoProductoInput {
 enum EstadoPedido {
     PENDIENTE
     COMPLETADO
-    CANCELADO
+    CANCELADO 
 }
 
 #  ***** MUTATIONS ***** # 
