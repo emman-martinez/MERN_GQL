@@ -26,8 +26,12 @@ export const resolvers = {
             });
         },
         // ***** Q: PRODUCTOS ***** //
-        obtenerProductos: (root, { limite, offset }) => {
-            return Productos.find({}).limit(limite).skip(offset)
+        obtenerProductos: (root, { limite, offset, stock }) => {
+            let filtro;
+            if(stock) {
+                filtro = { stock: {$gt: 0}} // Función de MongoDB para revisar el campo y valor para filtrar
+            }
+            return Productos.find(filtro).limit(limite).skip(offset)
         },
         obtenerProducto: (root, { id }) => {
             return new Promise((resolve, object) => {

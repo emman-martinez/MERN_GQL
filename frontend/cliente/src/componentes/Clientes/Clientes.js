@@ -82,6 +82,12 @@ class Clientes extends Component {
                                                             >
                                                                 &#43; Nuevo Pedido
                                                             </Link>
+                                                            <Link
+                                                                to={`/pedidos/${id}`}
+                                                                className="btn btn-primary d-block d-md-inline-block mr-2"
+                                                            >
+                                                                Ver Pedidos
+                                                            </Link>
                                                             <Mutation 
                                                                 mutation={ELIMINAR_CLIENTE}
                                                                 onCompleted={(data) => {
