@@ -12,6 +12,7 @@ type Query {
     totalProductos: String 
 
     # Pedidos
+    obtenerPedidos(cliente: String): [Pedido]
 
 }
 

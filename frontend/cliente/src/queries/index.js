@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 
+// ***** CLIENTES ***** //
 export const CLIENTES_QUERY = gql `
     query getClientes($limite: Int, $offset: Int) {
         getClientes(limite: $limite, offset: $offset){
@@ -27,6 +28,7 @@ export const CLIENTE_QUERY = gql `
         }
 }`;
 
+// ***** PRODUCTOS ***** //
 export const OBTENER_PRODUCTOS = gql `
     query obtenerProductos($limite: Int, $offset: Int, $stock: Boolean) {
         obtenerProductos(limite: $limite, offset: $offset, stock: $stock) {
@@ -46,6 +48,23 @@ export const OBTENER_PRODUCTO = gql `
             nombre
             precio
             stock
+        }
+    }
+`;
+
+// ***** PEDIDOS ***** //
+export const OBTENER_PEDIDOS = gql `
+    query obtenerPedidos($cliente: String) {
+        obtenerPedidos(cliente: $cliente) {
+            id
+            pedido {
+                id
+                cantidad
+            }
+            total
+            fecha
+            cliente
+            estado
         }
     }
 `;

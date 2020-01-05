@@ -28,8 +28,8 @@ export const resolvers = {
         // ***** Q: PRODUCTOS ***** //
         obtenerProductos: (root, { limite, offset, stock }) => {
             let filtro;
-            if(stock) {
-                filtro = { stock: {$gt: 0}} // Función de MongoDB para revisar el campo y valor para filtrar
+            if (stock) {
+                filtro = { stock: { $gt: 0 } } // Función de MongoDB para revisar el campo y valor para filtrar
             }
             return Productos.find(filtro).limit(limite).skip(offset)
         },
@@ -50,9 +50,14 @@ export const resolvers = {
             });
         },
         // ***** Q: PEDIDOS ***** //
-        //getPedidos: (root, { limite, offset }) => {
-        //  return Pedidos.find({}).limit(limite).skip(offset)
-        //},
+        obtenerPedidos: (root, { cliente }) => {
+            return new Promise((resolve, object) => {
+                Pedidos.find({ cliente: cliente }, (error, pedido) => {
+                    if (error) rejects(error);
+                    else resolve(pedido);
+                })
+            })
+        },
     },
     Mutation: {
         // ***** M: CLIENTES ***** //
