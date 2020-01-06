@@ -1,12 +1,18 @@
 import React from 'react';
+import { Query } from 'react-apollo';
+import { OBTENER_PRODUCTO } from './../../queries';
+import Cdesvanecido from './../Spinners/Cdesvanecido';
+import ResumenProducto from './ResumenProducto';
 
 const Pedido = (props) => {
+    
     // console.log(props);
-
     const { pedido } = props;
-    console.log('Pedido: ', pedido);
-    console.log(Number(pedido.fecha));
     const fecha = new Date(Number(pedido.fecha));
+    // console.log('Pedido: ', pedido);
+    // console.log(Number(pedido.fecha));
+    const { id } = pedido;
+    // console.log(id);
 
     return (
         <div className="col-md-4">
@@ -16,6 +22,18 @@ const Pedido = (props) => {
                             <select 
                                 className="form-control my-3"
                                 value={pedido.estado}
+                                onChange={ e=> {
+                                    console.log(e.target.value);
+                                    const input =  {
+                                        id,
+                                        pedido: pedido.pedido,
+                                        fecha: pedido.fecha,
+                                        total: pedido.total,
+                                        cliente: props.cliente,
+                                        estado: e.target.value
+                                    }
+                                    console.log(input);
+                                }}
                             >
                                     <option value="PENDIENTE">PENDIENTE</option>
                                     <option value="COMPLETADO">COMPLETADO</option>
@@ -33,6 +51,31 @@ const Pedido = (props) => {
                     </p>
 
                     <h3 className="card-text text-center mb-3">Artículos del pedido</h3>
+                    {
+                        pedido.pedido.map((producto, index) => {
+                            // console.log(producto);
+                            const { id, cantidad } = producto;
+                                return (
+                                    <Query key={pedido.id+index} query={OBTENER_PRODUCTO} variables={{id}}>
+                                        {
+                                            ({loading, error, data}) => {
+                                                if(loading) return( <Cdesvanecido/> );
+                                                if(error) return `Error ${error.message}`;
+                                                // console.log(data); 
+                                                return(
+                                                    <ResumenProducto
+                                                        data={data}
+                                                        cantidad={cantidad}
+                                                        key={id}
+                                                    />
+                                                );
+                                            }
+                                        }
+                                    </Query>
+                                );
+                            }
+                        )
+                    }
                 </div>
             </div>
         </div>
