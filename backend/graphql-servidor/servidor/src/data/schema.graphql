@@ -131,7 +131,7 @@ type Mutation {
     """ Te permite crear Nuevos Pedidos """
     nuevoPedido(input: PedidoInput) : Pedido
     """ Te permite actualizar Pedidos """
-    actualizarPedido(input: PedidoInput) : Pedido
+    actualizarEstado(input: PedidoInput) : String
     """ Te permite eliminar Pedidos """
     eliminarPedido(id: ID!) : String  
 }  
