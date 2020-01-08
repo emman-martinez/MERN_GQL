@@ -164,7 +164,7 @@ export const resolvers = {
             return new Promise((resolve, object) => {
                 Pedidos.findOneAndUpdate({ _id: input.id }, input, { new: true }, (error) => {
                     if (error) rejects(error);
-                    else resolve('Se actualizo correctamente');
+                    else resolve('Se actualizó correctamente');
                 })
             })
         }
