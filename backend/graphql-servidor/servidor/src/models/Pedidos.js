@@ -5,7 +5,7 @@ const pedidosSchema = new Schema({
     pedido: Array, // [Id del producto, Cantidad]
     total: Number,
     fecha: Date,
-    cliente: String,
+    cliente: Schema.Types.ObjectId, //cliente: String,
     estado: String
 }, {
     timestamps: true // Fecha de creación y actualización

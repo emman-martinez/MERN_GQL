@@ -7,17 +7,30 @@ import ResumenProducto from './ResumenProducto';
 
 const Pedido = (props) => {
     
-    // console.log(props);
+    
     const { pedido } = props;
-    const fecha = new Date(Number(pedido.fecha));
+    const fecha = new Date(Number(pedido.fecha)); // Fecha del pedido
+    const { id, estado } = pedido; // Id del pedido, Estado y clases de estado
+    console.log(estado);
+
+    let clase;
+
+    if(estado === 'PENDIENTE') {
+        clase = 'border-light';
+    } else if (estado === 'CANCELADO') {
+        clase = 'border-danger';
+    } else {
+        clase = 'border-success';
+    }
+
+    // console.log(props);
     // console.log('Pedido: ', pedido);
     // console.log(Number(pedido.fecha));
-    const { id } = pedido;
     // console.log(id);
 
     return (
         <div className="col-md-4">
-            <div className={`card mb-3`} >
+            <div className={`card mb-3 ${clase}`} >
                 <div className="card-body">
                     <p className="card-text font-weight-bold ">Estado:
                         <Mutation mutation={ACTUALIZAR_ESTADO}>
