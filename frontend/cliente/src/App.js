@@ -60,6 +60,7 @@ class App extends Component {
                 { /* ***** Route --> Componente: PedidosCliente ***** */ }
                 <Route exact path="/pedidos/:id" component={PedidosCliente}/>
                 { /* ***** PANEL: Gráficas ***** */ }
+                { /* ***** Route --> Componente: Panel ***** */ }
                 <Route exact path="/panel" component={Panel}/>
               </Switch>
             </div>

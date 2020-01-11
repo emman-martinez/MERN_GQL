@@ -14,6 +14,9 @@ type Query {
     # Pedidos
     obtenerPedidos(cliente: String): [Pedido]
 
+    # Gráficas de Top de Clientes
+    topClientes: [ClienteTotal]
+
 }
 
 # ***** TYPE CLIENTE ***** #
@@ -51,6 +54,12 @@ type Pedido {
 type PedidoProducto {
     id: ID
     cantidad: Int
+}
+
+# *** TYPE GRÁFICA *** #
+type ClienteTotal {
+    total: Float
+    cliente: [Cliente]
 }
 
 # ***** M: INPUTS ***** #
