@@ -142,5 +142,11 @@ type Mutation {
     """ Te permite actualizar Pedidos """
     actualizarEstado(input: PedidoInput) : String
     """ Te permite eliminar Pedidos """
-    eliminarPedido(id: ID!) : String  
+    eliminarPedido(id: ID!) : String 
+
+    # *** Usuarios *** #
+    # Nombre del Resolver(MUTATION), Input con Datos(INPUT) y valor que retorna(TYPE)
+    """ Te permite crear Nuevos Usuarios """
+    crearUsuario(usuario: String!, password: String!) : String
+
 }  

@@ -1,4 +1,4 @@
-/* Mongo Schema: Clientes */
+/* Mongo Schema: Productos */
 import { Schema, model } from 'mongoose';
 
 const productosSchema = new Schema({

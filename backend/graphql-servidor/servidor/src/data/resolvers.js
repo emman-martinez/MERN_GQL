@@ -2,6 +2,7 @@ import { rejects } from 'assert';
 const Clientes = require('./../models/Clientes');
 const Productos = require('./../models/Productos');
 const Pedidos = require('./../models/Pedidos');
+const Usuarios = require('./../models/Usuarios');
 
 export const resolvers = {
     Query: {
@@ -60,12 +61,11 @@ export const resolvers = {
         },
         topClientes: (root) => {
             return new Promise((resolve, object) => {
-                Pedidos.aggregate([
-                    {
+                Pedidos.aggregate([{
                         $match: { estado: "COMPLETADO" }
                     },
                     {
-                        $group : {
+                        $group: {
                             _id: "$cliente",
                             total: { $sum: "$total" }
                         }
@@ -85,8 +85,8 @@ export const resolvers = {
                         $limit: 10
                     }
                 ], (error, resultado) => {
-                    if(error) rejects(error);
-                    else resolve(resultado); 
+                    if (error) rejects(error);
+                    else resolve(resultado);
                 })
             })
         }
@@ -210,6 +210,25 @@ export const resolvers = {
                     else resolve('Se actualizó correctamente');
                 })
             })
+        },
+        // ***** M: USUARIOS ***** //
+        crearUsuario: async(root, { usuario, password }) => {
+
+            // Revisar si un usuario contiene password repetido
+            const existeUsuario = await Usuarios.findOne({ usuario: usuario }); // Método de mongoose
+
+            if (existeUsuario) {
+                throw new Error('El usuario ya existe');
+            }
+
+            const nuevoUsuario = await new Usuarios({
+                usuario,
+                password
+            }).save();
+
+            console.log(nuevoUsuario);
+
+            return "Usuario Creado Correctamente";
         }
     }
 }

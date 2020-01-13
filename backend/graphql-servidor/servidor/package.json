@@ -18,6 +18,7 @@
     "homepage": "https://github.com/Emasesosos/MERN_GQL#readme",
     "dependencies": {
         "apollo-server-express": "^2.9.7",
+        "bcryptjs": "^2.4.3",
         "colors": "^1.4.0",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
