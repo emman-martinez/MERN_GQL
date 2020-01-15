@@ -20,6 +20,7 @@ import PedidosCliente from './componentes/Pedidos/PedidosCliente';
 import Panel from './componentes/Panel/Panel';
 
 import Registro from './componentes/Auth/Registro';
+import Login from './componentes/Auth/Login';
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -64,6 +65,8 @@ class App extends Component {
                 { /* ***** USUARIOS ***** */ }
                 { /* ***** Route --> Componente: Registro ***** */ }
                 <Route exact path="/registro" component={Registro}/>
+                { /* ***** Route --> Componente: Login ***** */ }
+                <Route exact path="/login" component={Login}/>
                 { /* ***** PANEL: Gráficas ***** */ }
                 { /* ***** Route --> Componente: Panel ***** */ }
                 <Route exact path="/panel" component={Panel}/>

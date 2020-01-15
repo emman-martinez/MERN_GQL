@@ -3,6 +3,19 @@ const Clientes = require('./../models/Clientes');
 const Productos = require('./../models/Productos');
 const Pedidos = require('./../models/Pedidos');
 const Usuarios = require('./../models/Usuarios');
+import bcrypt from 'bcryptjs';
+
+// Generar Token
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+
+import jwt from 'jsonwebtoken';
+
+const crearToken = (usuarioLogin, secreto, expiresIn) => {
+    const { usuario } = usuarioLogin;
+
+    return jwt.sign({ usuario }, secreto, { expiresIn });
+};
 
 export const resolvers = {
     Query: {
@@ -229,6 +242,24 @@ export const resolvers = {
             console.log(nuevoUsuario);
 
             return "Usuario Creado Correctamente";
+        },
+        autenticarUsuario: async(root, { usuario, password }) => {
+            const nombreUsuario = await Usuarios.findOne({ usuario });
+
+            if (!nombreUsuario) {
+                throw new Error('Usuario no encontrado');
+            }
+
+            const passwordCorrecto = await bcrypt.compare(password, nombreUsuario.password);
+
+            // Si el password es incorrecto
+            if (!passwordCorrecto) {
+                throw new Error('Password Incorrecto');
+            }
+
+            return { // Si existe el usuario y el password es correcto
+                token: crearToken(nombreUsuario, process.env.SECRETO, '1hr')
+            }
         }
     }
 }
