@@ -24,6 +24,18 @@ import Login from './componentes/Auth/Login';
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
+  // Enviar Token al servidor
+  fetchOptions: {
+    credentials: 'include'
+  },
+  request: operation => { // Para la lectura del Token y enviar al backend
+    const token = localStorage.getItem('token');
+    operation.setContext({  // Enviar datos hacia el servidor
+      headers: {
+        authorization: token
+      }
+    })
+  },
   cache: new InMemoryCache({
     addTypename: false
   }),

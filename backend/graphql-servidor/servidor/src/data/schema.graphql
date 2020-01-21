@@ -17,6 +17,9 @@ type Query {
     # Gráficas de Top de Clientes
     topClientes: [ClienteTotal]
 
+    # Usuarios
+    obtenerUsuario: Usuario
+
 }
 
 # ***** TYPE CLIENTE ***** #
@@ -56,15 +59,19 @@ type PedidoProducto {
     cantidad: Int
 }
 
+# *** TYPE GRÁFICA *** #
+type ClienteTotal {
+    total: Float
+    cliente: [Cliente]
+}
+
 # *** TYPE USUARIO *** #
 type Token {
     token: String!
 }
 
-# *** TYPE GRÁFICA *** #
-type ClienteTotal {
-    total: Float
-    cliente: [Cliente]
+type Usuario {
+    usuario: String
 }
 
 # ***** M: INPUTS ***** #
