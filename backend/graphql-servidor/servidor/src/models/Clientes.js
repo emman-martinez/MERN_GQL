@@ -1,5 +1,5 @@
 /* Mongo Schema: Clientes */
-import { Schema, model } from 'mongoose';
+import { Schema, model, Mongoose } from 'mongoose';
 
 const clientesSchema = new Schema({
     nombre: String,
@@ -8,7 +8,8 @@ const clientesSchema = new Schema({
     emails: Array,
     edad: Number,
     tipo: String,
-    pedidos: Array
+    pedidos: Array,
+    vendedor: Schema.Types.ObjectId 
 }, {
     timestamps: true // Fecha de creación y actualización
 });

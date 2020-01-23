@@ -23,7 +23,7 @@ const App = ({refetch, session}) => {
   console.log('Session: ', session);
 
   const { obtenerUsuario } = session;
-  const mensaje = (obtenerUsuario) ? `Bienvenido: ${obtenerUsuario.usuario}` : <Redirect to="/login"/>;
+  const mensaje = (obtenerUsuario) ? `Bienvenido: ${obtenerUsuario.nombre}` : <Redirect to="/login"/>;
 
   return(
     
@@ -40,7 +40,7 @@ const App = ({refetch, session}) => {
               { /* ***** Route --> Componente: EditarCliente ***** */ }
               <Route exact path="/clientes/editar/:id" component={EditarCliente}/>
               { /* ***** Route --> Componente: NuevoCliente ***** */ }
-              <Route exact path="/clientes/nuevo" component={NuevoCliente}/>
+              <Route exact path="/clientes/nuevo" render={ () => <NuevoCliente session={session}/>}/>
               { /* ***** PRODUCTOS ***** */ } 
               { /* ***** Route --> Componente: Productos ***** */ }
               <Route exact path="/productos" component={Productos}/>

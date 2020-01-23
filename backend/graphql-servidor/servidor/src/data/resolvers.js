@@ -127,7 +127,8 @@ export const resolvers = {
                 //email: input.email, 
                 edad: input.edad,
                 tipo: input.tipo,
-                pedidos: input.pedidos
+                pedidos: input.pedidos,
+                vendedor: input.vendedor
             });
             nuevoCliente.id = nuevoCliente._id;
             return new Promise((resolve, object) => {
@@ -237,7 +238,7 @@ export const resolvers = {
             })
         },
         // ***** M: USUARIOS ***** //
-        crearUsuario: async(root, { usuario, password }) => {
+        crearUsuario: async(root, { usuario, nombre, password, rol }) => {
 
             // Revisar si un usuario contiene password repetido
             const existeUsuario = await Usuarios.findOne({ usuario: usuario }); // Método de mongoose
@@ -248,7 +249,9 @@ export const resolvers = {
 
             const nuevoUsuario = await new Usuarios({
                 usuario,
-                password
+                nombre,
+                password,
+                rol
             }).save();
 
             console.log(nuevoUsuario);

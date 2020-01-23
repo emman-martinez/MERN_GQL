@@ -87,7 +87,10 @@ export const TOP_CLIENTES = gql `
 export const USUARIO_ACTUAL = gql `
     query obtenerUsuario {
         obtenerUsuario {
+            id
             usuario
+            nombre
+            rol 
         }
     }
 `;

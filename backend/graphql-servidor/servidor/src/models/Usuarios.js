@@ -4,7 +4,9 @@ import bcrypt from 'bcryptjs';
 
 const usuariosSchema = new Schema({
     usuario: String,
-    password: String
+    nombre: String,
+    password: String,
+    rol: String
 }, {
     timestamps: true // Fecha de creación y actualización
 });

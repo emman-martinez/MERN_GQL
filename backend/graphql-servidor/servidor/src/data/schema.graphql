@@ -72,6 +72,9 @@ type Token {
 
 type Usuario {
     usuario: String
+    id: ID
+    nombre: String
+    rol: String
 }
 
 # ***** M: INPUTS ***** #
@@ -83,9 +86,10 @@ input ClienteInput {
     empresa: String!
     emails: [EmailInput] 
     #email: String
-    edad: Int!
+    edad: Int! 
     tipo: TipoCliente!
     pedidos: [PedidoInput]
+    vendedor: ID
 }
 input EmailInput {
     email: String
@@ -159,7 +163,7 @@ type Mutation {
     # *** Usuarios *** #
     # Nombre del Resolver(MUTATION), Input con Datos(INPUT) y valor que retorna(TYPE)
     """ Te permite crear Nuevos Usuarios """
-    crearUsuario(usuario: String!, password: String!) : String
+    crearUsuario(usuario: String!, nombre: String!, password: String!, rol: String!) : String
     """ Te permite autenticar el Usuario """
     # autenticarUsuario(usuario: String!, password: String!) : String
     autenticarUsuario(usuario: String!, password: String!) : Token
