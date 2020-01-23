@@ -2,7 +2,7 @@
 type Query { 
 
     # Cliente
-    getClientes(limite: Int, offset: Int): [Cliente]    
+    getClientes(limite: Int, offset: Int, vendedor: String): [Cliente]    
     getCliente(id: ID) : Cliente  
     totalClientes: String  
 

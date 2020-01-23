@@ -36,7 +36,7 @@ const App = ({refetch, session}) => {
             <Switch>
               { /* ***** CLIENTES ***** */ }
               { /* ***** Route --> Componente: Clientes ***** */ }
-              <Route exact path="/clientes" component={Clientes}/>
+              <Route exact path="/clientes" render={ () => <Clientes session={session}/>}/> 
               { /* ***** Route --> Componente: EditarCliente ***** */ }
               <Route exact path="/clientes/editar/:id" component={EditarCliente}/>
               { /* ***** Route --> Componente: NuevoCliente ***** */ }

@@ -4,6 +4,9 @@ const Productos = require('./../models/Productos');
 const Pedidos = require('./../models/Pedidos');
 const Usuarios = require('./../models/Usuarios');
 import bcrypt from 'bcryptjs';
+import { Schema, Mongoose } from 'mongoose';
+
+// const ObjectId = Schema.Types.ObjectId; // Convertir String a ObjectId
 
 // Generar Token
 import dotenv from 'dotenv';
@@ -20,8 +23,12 @@ const crearToken = (usuarioLogin, secreto, expiresIn) => {
 export const resolvers = {
     Query: {
         // ***** Q: CLIENTES ***** //
-        getClientes: (root, { limite, offset }) => {
-            return Clientes.find({}).limit(limite).skip(offset)
+        getClientes: (root, { limite, offset, vendedor }) => {
+            let filtro;
+            if (vendedor) {
+                filtro = { vendedor } //{ vendedor: new ObjectId(vendedor) }
+            }
+            return Clientes.find(filtro).limit(limite).skip(offset)
         },
         getCliente: (root, { id }) => {
             return new Promise((resolve, object) => {
