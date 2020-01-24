@@ -50,12 +50,12 @@ const App = ({refetch, session}) => {
               <Route exact path="/productos/nuevo" component={NuevoProducto}/>
               { /* ***** PEDIDOS ***** */ }
               { /* ***** Route --> Componente: NuevoProducto ***** */ }
-              <Route exact path="/pedidos/nuevo/:id" component={NuevoPedido}/>
+              <Route exact path="/pedidos/nuevo/:id" render={ () => <NuevoPedido session={session}/>}/>
               { /* ***** Route --> Componente: PedidosCliente ***** */ }
               <Route exact path="/pedidos/:id" component={PedidosCliente}/>
               { /* ***** USUARIOS ***** */ }
               { /* ***** Route --> Componente: Registro ***** */ }
-              <Route exact path="/registro" component={Registro}/>
+              <Route exact path="/registro" render={ () => <Registro session={session}/>}/>
               { /* ***** Route --> Componente: Login ***** */ }
               <Route exact path="/login" render={() => <Login refetch={refetch}/>} />
               { /* ***** PANEL: Gráficas ***** */ }

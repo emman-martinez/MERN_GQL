@@ -201,7 +201,8 @@ export const resolvers = {
                 total: input.total,
                 fecha: new Date(),
                 cliente: input.cliente,
-                estado: "PENDIENTE"
+                estado: "PENDIENTE",
+                vendedor: input.vendedor
             });
             nuevoPedido.id = nuevoPedido._id;
             return new Promise((resolve, object) => { // Mutation --> Graphql con Mongoose --> return Promise

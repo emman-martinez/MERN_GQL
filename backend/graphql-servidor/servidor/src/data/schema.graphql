@@ -117,6 +117,7 @@ input PedidoInput {
     fecha: String
     cliente: ID
     estado: EstadoPedido
+    vendedor: ID
 }
 input PedidoProductoInput {
     id: ID

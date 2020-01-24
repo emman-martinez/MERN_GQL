@@ -6,7 +6,8 @@ const pedidosSchema = new Schema({
     total: Number,
     fecha: Date,
     cliente: Schema.Types.ObjectId, //cliente: String,
-    estado: String
+    estado: String,
+    vendedor: Schema.Types.ObjectId
 }, {
     timestamps: true // Fecha de creación y actualización
 });
