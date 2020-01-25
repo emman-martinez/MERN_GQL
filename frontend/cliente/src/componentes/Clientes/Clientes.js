@@ -168,7 +168,7 @@ class Clientes extends Component {
                                 paginaAnterior={this.paginaAnterior}
                                 paginaSiguiente={this.paginaSiguiente}
                             />
-                        </Fragment>
+                        </Fragment> 
                     );
                 }}
             </Query> 

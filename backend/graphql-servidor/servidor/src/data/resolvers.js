@@ -38,9 +38,13 @@ export const resolvers = {
                 });
             });
         },
-        totalClientes: (root) => {
+        totalClientes: (root, { vendedor }) => {
             return new Promise((resolve, object) => {
-                Clientes.countDocuments({}, (error, count) => {
+                let filtro;
+                if (vendedor) {
+                    filtro = { vendedor } //{ vendedor: new ObjectId(vendedor) }
+                }
+                Clientes.countDocuments(filtro, (error, count) => {
                     if (error) rejects(error)
                     else resolve(count)
                 });
@@ -121,7 +125,38 @@ export const resolvers = {
             const usuario = Usuarios.findOne({ usuario: usuarioActual.usuario });
 
             return usuario;
-        }
+        },
+        topVendedores: (root) => {
+            return new Promise((resolve, object) => {
+                Pedidos.aggregate([{
+                        $match: { estado: "COMPLETADO" }
+                    },
+                    {
+                        $group: {
+                            _id: "$vendedor",
+                            total: { $sum: "$total" }
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: "usuarios",
+                            localField: '_id',
+                            foreignField: '_id',
+                            as: 'vendedor'
+                        }
+                    },
+                    {
+                        $sort: { total: -1 }
+                    },
+                    {
+                        $limit: 10
+                    }
+                ], (error, resultado) => {
+                    if (error) rejects(error);
+                    else resolve(resultado);
+                })
+            })
+        },
     },
     Mutation: {
         // ***** M: CLIENTES ***** //

@@ -4,7 +4,7 @@ type Query {
     # Cliente
     getClientes(limite: Int, offset: Int, vendedor: String): [Cliente]    
     getCliente(id: ID) : Cliente  
-    totalClientes: String  
+    totalClientes(vendedor: String): String  
 
     # Productos
     obtenerProductos(limite: Int, offset: Int, stock: Boolean): [Producto]
@@ -16,6 +16,7 @@ type Query {
 
     # Gráficas de Top de Clientes
     topClientes: [ClienteTotal]
+    topVendedores: [VendedorTotal]
 
     # Usuarios
     obtenerUsuario: Usuario
@@ -64,6 +65,12 @@ type ClienteTotal {
     total: Float
     cliente: [Cliente]
 }
+
+type VendedorTotal {
+    total: Float
+    vendedor: [Usuario]
+}
+
 
 # *** TYPE USUARIO *** #
 type Token {

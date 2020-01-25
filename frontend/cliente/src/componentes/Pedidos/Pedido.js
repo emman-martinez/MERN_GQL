@@ -4,6 +4,7 @@ import { OBTENER_PRODUCTO } from './../../queries';
 import { ACTUALIZAR_ESTADO } from './../../mutations';
 import Cdesvanecido from './../Spinners/Cdesvanecido';
 import ResumenProducto from './ResumenProducto';
+import './../../Pedidos.css';
 
 const Pedido = (props) => {
     
@@ -67,13 +68,10 @@ const Pedido = (props) => {
                     <p className="card-text font-weight-bold">Fecha Pedido: 
                         <span className="font-weight-normal"> {fecha.toLocaleString("es-MX")}</span>
                     </p>
-                    <p className="card-text font-weight-bold">Total: 
-                        <span className="font-weight-normal"> $ {pedido.total}</span>
-                    </p>
 
-                    <h3 className="card-text text-center mb-3">Artículos del pedido</h3>
+                    <h3 className="card-text text-center mb-3 resaltar-texto">Artículos del pedido</h3>
                     {
-                        pedido.pedido.map((producto, index) => {
+                        pedido.pedido.map((producto, index) => { 
                             // console.log(producto);
                             const { id, cantidad } = producto;
                                 return (
@@ -97,6 +95,10 @@ const Pedido = (props) => {
                             }
                         )
                     }
+                    <div className="d-flex align-items-center justify-content-end">
+                        <p className="card-text resaltar-texto mr-1 bg-amarillo">Total: </p> 
+                        <p className="font-weight-normal inc-texto">$ {pedido.total}</p>
+                    </div>
                 </div>
             </div>
         </div>

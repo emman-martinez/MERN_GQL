@@ -10,7 +10,7 @@ const ResumenProducto = (props) => {
 
     return(
         <Fragment>
-            <div className="border mb-4 p-4">
+            <div className="contenedor-productos mb-4 p-4">
                 <p className="card-text font-weight-bold">
                     Nombre del Producto:
                     <span className="font-weight-normal"> {nombre}</span>

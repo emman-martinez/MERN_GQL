@@ -1,47 +1,47 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-import { TOP_CLIENTES } from './../../queries';
+import { TOP_VENDEDORES } from './../../queries';
 import Bparalelas from './../Spinners/Bparalelas';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'; 
 
-const Clientes = () => {
+const Vendedores = () => {
     return (
-        <Query query={TOP_CLIENTES}>
+        <Query query={TOP_VENDEDORES}>
             {
                 ({loading, error, data}) => {
                     if (loading) return (<Bparalelas/>);
                     if(error) return `Error ${error.message}`;
 
                     console.log(data);
-                    const topClientesGrafica = [];
-                    const { topClientes } = data;
-                    console.log(topClientes);
+                    const vendedoresGrafica = [];
+                    const { topVendedores } = data;
+                    console.log(topVendedores);
 
-                    topClientes.map((pedido, index) => {
-                        console.log(pedido)
+                    topVendedores.map((vendedor, index) => {
+                        console.log(vendedor)
                         return(
-                            topClientesGrafica[index] = {
-                                ...pedido.cliente[0],
-                                total: pedido.total
+                            vendedoresGrafica[index] = {
+                                ...vendedor.vendedor[0],
+                                total: vendedor.total
                             }
                         );
                         
                     })
                     
-                    console.log(topClientesGrafica);
+                    console.log(vendedoresGrafica);
 
                     return(
                         <BarChart 
                             width={1000} 
                             height={300} 
-                            data={topClientesGrafica} 
+                            data={vendedoresGrafica}
                             margin={{top: 5, right: 30, left: 20, bottom: 5}}
                         >
                             <CartesianGrid strokeDasharray="3 3"/>
                             <XAxis dataKey="nombre"/>
                             <YAxis/>
                             <Tooltip/>
-                            <Bar dataKey="total" fill="#10a98b" />
+                            <Bar dataKey="total" fill="#6148b9" />
                             
                         </BarChart>
                     );
@@ -51,4 +51,4 @@ const Clientes = () => {
     );
 }
 
-export default Clientes;
+export default Vendedores;
